@@ -236,6 +236,21 @@ public:
     return GetTileReliability(linearIndex);
   }
 
+  using CandidateConfidences = std::vector<ConfidencesType>
+
+  itkGetConstReferenceMacro(CandidateConfidences, CandidateConfidences);
+  float
+  GetCandidateConfidence(DataObjectPointerArraySizeType linearIndex, DataObjectPointerArraySizeType candidateIndex = 0) const
+  {
+    return m_CandidateConfidences[linearIndex][candidateIndex];
+  }
+  float
+  GetCandidateConfidence(TileIndexType nDIndex, TileIndexType candidateIndex = 0) const
+  {
+    DataObjectPointerArraySizeType linearIndex = nDIndexToLinearIndex(nDIndex);
+    return GetCandidateConfidence(linearIndex, candidateIndex);
+  }
+
 protected:
   TileMontage();
   ~TileMontage() override = default;
